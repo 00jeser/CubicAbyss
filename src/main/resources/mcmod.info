@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "CubicAbyss",
+    "name": "Cubic Abyss",
+    "description": "abyss world type for cubic chunks",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "00jeser"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
