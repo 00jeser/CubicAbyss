@@ -6,19 +6,15 @@ import io.github.opencubicchunks.cubicchunks.api.worldgen.ICubeGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraftforge.fml.common.IWorldGenerator;
 
-import javax.annotation.Nullable;
-import java.util.Random;
+public class AbyssWorldGenerator extends WorldType implements ICubicWorldType {
 
-public class AbyssWorldGenerator  extends WorldType implements ICubicWorldType {
+    public static final float RADIUS = 100;
 
-    public static AbyssWorldGenerator create ()
-    {
+    public static AbyssWorldGenerator create() {
         return new AbyssWorldGenerator();
     }
+
     public AbyssWorldGenerator() {
         super("aughauua");
     }
