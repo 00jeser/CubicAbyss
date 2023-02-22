@@ -7,6 +7,7 @@ import io.github.opencubicchunks.cubicchunks.api.worldgen.CubeGeneratorsRegistry
 import io.github.opencubicchunks.cubicchunks.api.worldgen.CubePrimer;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.populator.CubePopulatorEvent;
 import jeser.cubicabyss.world.generator.Generators.IGenerationLayer;
+import jeser.cubicabyss.world.generator.Generators.IslandsLayerGenerator;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -32,6 +33,7 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
 
 
     private IGenerationLayer[] generationLayers = new IGenerationLayer[]{
+            new IslandsLayerGenerator(world.getSeed())
     };
 
     @Override
@@ -51,7 +53,7 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
                             IBlockState state = null;
                             for (IGenerationLayer layer : generationLayers) {
                                 state = layer.getState(
-                                        x, y, z,
+                                        globalX, globalY, globalZ,
                                         distance,
                                         state
                                 );
