@@ -39,7 +39,7 @@ public class AbyssWorldGenerator extends WorldType implements ICubicWorldType {
     @Override
     public ICubeGenerator createCubeGenerator(World world) {
         world.setSpawnPoint(new BlockPos(101, 70, 0));
-        return new CustomTerrainGenerator(world, world.getSeed());
+        return new CustomTerrainGenerator(world);
     }
 
 

@@ -22,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class CustomTerrainGenerator extends BasicCubeGenerator {
 
-    public CustomTerrainGenerator(World world, long seed) {
+    public CustomTerrainGenerator(World world) {
         super(world);
     }
 
@@ -32,13 +32,12 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
     }
 
 
-    private IGenerationLayer[] generationLayers = new IGenerationLayer[]{
+    private final IGenerationLayer[] generationLayers = new IGenerationLayer[]{
             new IslandsLayerGenerator(world.getSeed())
     };
 
     @Override
     public CubePrimer generateCube(int cubeX, int cubeY, int cubeZ, CubePrimer primer) {
-
         for (int y = 0; y < ICube.SIZE; y++)
             for (int x = 0; x < ICube.SIZE; x++)
                 for (int z = 0; z < ICube.SIZE; z++) {
@@ -72,9 +71,6 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
 
     @Override
     public void populate(ICube cube) {
-        /**
-         * If event is not canceled we will use cube populators from registry.
-         **/
         if (!MinecraftForge.EVENT_BUS.post(new CubePopulatorEvent(world, cube))) {
             CubeGeneratorsRegistry.generateWorld(cube.getWorld(),
                     Coords.coordsSeedRandom(cube.getWorld().getSeed(), cube.getX(), cube.getY(), cube.getZ()),
