@@ -9,8 +9,13 @@ import net.minecraft.init.Blocks;
 import java.util.Random;
 
 public class IslandsLayerGenerator implements IGenerationLayer {
-    FastNoiseLite noise1;
-    FastNoiseLite noise2;
+    private static final float scaleXZ1 = 3;
+    private static final float scaleY1 = 6;
+    private static final float scaleXZ2 = 3;
+    private static final float scaleY2 = 7;
+    private static final float distanceModifier = 1.2f;
+    private final FastNoiseLite noise1;
+    private final FastNoiseLite noise2;
     Random r;
 
     public IslandsLayerGenerator(long seed) {
@@ -25,7 +30,7 @@ public class IslandsLayerGenerator implements IGenerationLayer {
 
     @Override
     public IBlockState getState(int x, int y, int z, float distance, IBlockState state) {
-        float valueForCompare = 1 - (distance * 1.2f) / AbyssWorldGenerator.RADIUS;
+        float valueForCompare = 1 - (distance * distanceModifier) / AbyssWorldGenerator.RADIUS;
         if (getNoiseValue(x, y, z) > valueForCompare)
             if (getNoiseValue(x, y + 1, z) <= valueForCompare)
                 return Blocks.GRASS.getDefaultState();
@@ -35,7 +40,9 @@ public class IslandsLayerGenerator implements IGenerationLayer {
             switch (r.nextInt() % 10) {
                 case 0:
                 case 1:
-                    return Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
+                    return Blocks.TALLGRASS.getDefaultState().withProperty(
+                            BlockTallGrass.TYPE,
+                            BlockTallGrass.EnumType.GRASS);
                 case 2:
                     return Blocks.RED_FLOWER.getDefaultState();
                 default:
@@ -46,6 +53,8 @@ public class IslandsLayerGenerator implements IGenerationLayer {
     }
 
     private float getNoiseValue(int x, int y, int z) {
-        return noise1.GetNoise(x * 3, y * 6, z * 3) + noise2.GetNoise(x * 3, y * 7, z * 3);
+        return
+                noise1.GetNoise(x * scaleXZ1, y * scaleY1, z * scaleXZ1)
+                        + noise2.GetNoise(x * scaleXZ2, y * scaleY2, z * scaleXZ2);
     }
 }
