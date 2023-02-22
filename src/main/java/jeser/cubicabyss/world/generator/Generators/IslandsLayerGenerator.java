@@ -25,9 +25,9 @@ public class IslandsLayerGenerator implements IGenerationLayer {
 
     @Override
     public IBlockState getState(int x, int y, int z, float distance, IBlockState state) {
-        float valueForCompare = 1 - distance / AbyssWorldGenerator.RADIUS;
+        float valueForCompare = 1 - (distance * 1.2f) / AbyssWorldGenerator.RADIUS;
         if (getNoiseValue(x, y, z) > valueForCompare)
-            if (getNoiseValue(x, y - 1, z) > valueForCompare)
+            if (getNoiseValue(x, y + 1, z) <= valueForCompare)
                 return Blocks.GRASS.getDefaultState();
             else
                 return Blocks.STONE.getDefaultState();

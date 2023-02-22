@@ -14,7 +14,7 @@ import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraftforge.common.DimensionManager;
 
 public class AbyssWorldGenerator extends WorldType implements ICubicWorldType {
-    public static final int RADIUS = 100;
+    public static final int RADIUS = 200;
 
     public static AbyssWorldGenerator create() {
         return new AbyssWorldGenerator();
