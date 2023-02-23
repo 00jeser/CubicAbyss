@@ -1,4 +1,4 @@
-package jeser.cubicabyss.blocks.stoneTree;
+package jeser.cubicabyss.items;
 
 import jeser.cubicabyss.CubicAbyss;
 import net.minecraft.block.material.Material;

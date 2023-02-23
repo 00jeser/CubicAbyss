@@ -1,17 +1,13 @@
 package jeser.cubicabyss;
 
-import jeser.cubicabyss.blocks.stoneTree.StoneTree;
+import jeser.cubicabyss.items.StoneTree;
 import jeser.cubicabyss.items.PrincessBosom;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -110,13 +106,15 @@ public class CubicAbyss {
             ModelBakery.registerItemVariants(item, mrl);
             ModelLoader.setCustomModelResourceLocation(item, 0, mrl);
         }
-
         /**
          * Listen for the register event for creating custom blocks
          */
         @SubscribeEvent
         public static void addBlocks(RegistryEvent.Register<Block> event) {
-           /*
+            jeser.cubicabyss.blocks.StoneTree newBlock = new jeser.cubicabyss.blocks.StoneTree();
+            event.getRegistry().register(newBlock);
+            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(newBlock), 0, new ModelResourceLocation(newBlock.getRegistryName(), "inventory"));
+            /*
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));
             */
         }
@@ -130,8 +128,14 @@ public class CubicAbyss {
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new StoneTree());
-
+        event.getRegistry().register(new PrincessBosom());
     }
+    /*
+    @SubscribeEvent
+    public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+        event.getRegistry().register(new jeser.cubicabyss.blocks.StoneTree());
+    }
+     */
 
 
 
