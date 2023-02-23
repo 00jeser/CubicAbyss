@@ -1,5 +1,6 @@
 package jeser.cubicabyss;
 
+import jeser.cubicabyss.blocks.stoneTree.RegistryHandler;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -42,7 +43,7 @@ public class CubicAbyss {
      */
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
+        new RegistryHandler();
     }
 
     /**
@@ -111,4 +112,5 @@ public class CubicAbyss {
 
     }
     */
+
 }
