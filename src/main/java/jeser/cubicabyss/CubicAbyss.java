@@ -1,9 +1,13 @@
 package jeser.cubicabyss;
 
-import jeser.cubicabyss.blocks.stoneTree.RegistryHandler;
+import jeser.cubicabyss.blocks.stoneTree.StoneTree;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -11,6 +15,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(
         modid = CubicAbyss.MOD_ID,
@@ -43,7 +49,6 @@ public class CubicAbyss {
      */
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        new RegistryHandler();
     }
 
     /**
@@ -87,10 +92,16 @@ public class CubicAbyss {
          */
         @SubscribeEvent
         public static void addItems(RegistryEvent.Register<Item> event) {
-           /*
-             event.getRegistry().register(new ItemBlock(Blocks.myBlock).setRegistryName(MOD_ID, "myBlock"));
-             event.getRegistry().register(new MySpecialItem().setRegistryName(MOD_ID, "mySpecialItem"));
-            */
+            StoneTree a = new StoneTree();
+            event.getRegistry().register(a);
+            registryModel(a);
+        }
+        @SideOnly(Side.CLIENT)
+        private static void registryModel(Item item) {
+            final ResourceLocation regName = item.getRegistryName();// Не забываем, что getRegistryName может вернуть Null!
+            final ModelResourceLocation mrl = new ModelResourceLocation(regName, "inventory");
+            ModelBakery.registerItemVariants(item, mrl);// Регистрация вариантов предмета. Это нужно если мы хотим использовать подтипы предметов/блоков(см. статью подтипы)
+            ModelLoader.setCustomModelResourceLocation(item, 0, mrl);// Устанавливаем вариант модели для нашего предмета. Без регистрации варианта модели, сама модель не будет установлена для предмета/блока(см. статью подтипы)
         }
 
         /**
@@ -102,6 +113,10 @@ public class CubicAbyss {
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));
             */
         }
+    }
+    @SubscribeEvent
+    public static void onRegisterItems(RegistryEvent.Register<Item> event) {
+        event.getRegistry().register(new StoneTree());
     }
     /* EXAMPLE ITEM AND BLOCK - you probably want these in separate files
     public static class MySpecialItem extends Item {
