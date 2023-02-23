@@ -6,10 +6,16 @@ import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -118,6 +124,8 @@ public class CubicAbyss {
             event.getRegistry().register(a);
             registryModel(a);
         }
+        @SubscribeEvent
+        public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {}
     }
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
