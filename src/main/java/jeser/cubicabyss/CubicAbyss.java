@@ -92,16 +92,15 @@ public class CubicAbyss {
          */
         @SubscribeEvent
         public static void addItems(RegistryEvent.Register<Item> event) {
-            StoneTree a = new StoneTree();
-            event.getRegistry().register(a);
-            registryModel(a);
+            registryItem(new StoneTree(), event);
         }
+
         @SideOnly(Side.CLIENT)
         private static void registryModel(Item item) {
-            final ResourceLocation regName = item.getRegistryName();// Не забываем, что getRegistryName может вернуть Null!
+            final ResourceLocation regName = item.getRegistryName();
             final ModelResourceLocation mrl = new ModelResourceLocation(regName, "inventory");
-            ModelBakery.registerItemVariants(item, mrl);// Регистрация вариантов предмета. Это нужно если мы хотим использовать подтипы предметов/блоков(см. статью подтипы)
-            ModelLoader.setCustomModelResourceLocation(item, 0, mrl);// Устанавливаем вариант модели для нашего предмета. Без регистрации варианта модели, сама модель не будет установлена для предмета/блока(см. статью подтипы)
+            ModelBakery.registerItemVariants(item, mrl);
+            ModelLoader.setCustomModelResourceLocation(item, 0, mrl);
         }
 
         /**
@@ -113,11 +112,19 @@ public class CubicAbyss {
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));
             */
         }
+        public static void registryItem(Item a, RegistryEvent.Register<Item> event) {
+            event.getRegistry().register(a);
+            registryModel(a);
+        }
     }
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new StoneTree());
+
     }
+
+
+
     /* EXAMPLE ITEM AND BLOCK - you probably want these in separate files
     public static class MySpecialItem extends Item {
 
@@ -127,5 +134,4 @@ public class CubicAbyss {
 
     }
     */
-
 }
