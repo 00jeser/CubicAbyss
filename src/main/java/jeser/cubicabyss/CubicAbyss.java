@@ -1,6 +1,7 @@
 package jeser.cubicabyss;
 
 import jeser.cubicabyss.blocks.stoneTree.StoneTree;
+import jeser.cubicabyss.items.PrincessBosom;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -93,6 +94,7 @@ public class CubicAbyss {
         @SubscribeEvent
         public static void addItems(RegistryEvent.Register<Item> event) {
             registryItem(new StoneTree(), event);
+            registryItem(new PrincessBosom(), event);
         }
 
         @SideOnly(Side.CLIENT)
