@@ -2,6 +2,7 @@ package jeser.cubicabyss;
 
 import jeser.cubicabyss.Mobs.ExampleMob.ExampleMob;
 import jeser.cubicabyss.Mobs.RenderHandler;
+import jeser.cubicabyss.Mobs.Steve.Steve;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -39,6 +40,7 @@ public class CubicAbyss {
         AbyssWorldGenerator.create();
         RenderHandler.registerEntityRender();
         ExampleMob.register();
+        Steve.register();
     }
 
     /**
