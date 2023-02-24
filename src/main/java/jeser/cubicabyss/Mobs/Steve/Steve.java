@@ -5,18 +5,21 @@ import jeser.cubicabyss.Mobs.ExampleMob.ExampleMob;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-public class Steve extends EntityCreature {
+public class Steve extends EntityMob {
     public Steve(World worldIn) {
         super(worldIn);
-        setSize(1.0f, 2.0f);
     }
 
     public static void register() {
@@ -32,17 +35,24 @@ public class Steve extends EntityCreature {
                 0xFFAA00, 0x55FFFF
         );
     }
-    @Override
+    //@Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1,new EntityAIAttackMelee(this, 1.0D, true));
-        this.tasks.addTask(2,new EntityAIPanic(this, 0.5D));
-        this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.3D, 5F));
+        this.tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 10F));
+    }
+    protected void applyEntityAI() {
+        this.tasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     }
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.1D);
     }
+    protected SoundEvent getAmbientSound() {return SoundEvents.ENTITY_GHAST_AMBIENT;}
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {return SoundEvents.ENTITY_GHAST_HURT;}
 }
