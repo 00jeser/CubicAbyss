@@ -1,13 +1,13 @@
 package jeser.cubicabyss;
 
-import jeser.cubicabyss.items.StoneTree;
+import jeser.cubicabyss.blocks.StoneTree;
 import jeser.cubicabyss.items.PrincessBosom;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -95,7 +95,8 @@ public class CubicAbyss {
          */
         @SubscribeEvent
         public static void addItems(RegistryEvent.Register<Item> event) {
-            registryItem(new StoneTree(), event);
+            //registryItem(new StoneTree(), event);
+            //registryItem(new ItemBlock(new StoneTree()), event);
             registryItem(new PrincessBosom(), event);
         }
 
@@ -111,9 +112,7 @@ public class CubicAbyss {
          */
         @SubscribeEvent
         public static void addBlocks(RegistryEvent.Register<Block> event) {
-            jeser.cubicabyss.blocks.StoneTree newBlock = new jeser.cubicabyss.blocks.StoneTree();
-            event.getRegistry().register(newBlock);
-            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(newBlock), 0, new ModelResourceLocation(newBlock.getRegistryName(), "inventory"));
+            registryBlock(new StoneTree(), event);
             /*
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));
             */
@@ -122,12 +121,17 @@ public class CubicAbyss {
             event.getRegistry().register(a);
             registryModel(a);
         }
+        public static void registryBlock(Block block, RegistryEvent.Register<Block> event) {
+            ItemBlock ib = new ItemBlock(block);
+            event.getRegistry().register(block);
+            //registryModel(block);
+        }
         @SubscribeEvent
         public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {}
     }
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new StoneTree());
+        //event.getRegistry().register(new StoneTree());
         event.getRegistry().register(new PrincessBosom());
     }
     /*

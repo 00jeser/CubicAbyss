@@ -9,11 +9,11 @@ import net.minecraft.creativetab.CreativeTabs;
 public class StoneTree extends Block {
     public StoneTree() {
         super(Material.ROCK);
-        setRegistryName("stone_tree");
-        setHardness(1.0f);
-        setHarvestLevel("pickaxe", 0);
-        setResistance(1.0f);
-        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-        setSoundType(SoundType.STONE);
+        this.setHardness(1.5f);
+        this.setHarvestLevel("pickaxe", 0);
+        this.setResistance(1.0f);
+        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        this.setSoundType(SoundType.STONE);
+        this.setRegistryName("stone_tree");
     }
 }
