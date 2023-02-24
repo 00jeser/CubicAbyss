@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube_column",
   "textures": {
-    "all": "cubicabyss:blocks/stone_tree"
+    "end": "cubicabyss:blocks/stone_tree_top",
+    "side": "cubicabyss:blocks/stone_tree_side"
   }
 }
