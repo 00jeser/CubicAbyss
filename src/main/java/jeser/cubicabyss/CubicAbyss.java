@@ -1,6 +1,6 @@
 package jeser.cubicabyss;
 
-import jeser.cubicabyss.blocks.StoneTree;
+import jeser.cubicabyss.blocks.BlocksRegisterHandler;
 import jeser.cubicabyss.items.PrincessBosom;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
@@ -12,11 +12,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,6 +45,7 @@ public class CubicAbyss {
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
         AbyssWorldGenerator.create();
+        BlocksRegisterHandler.registerBlocks();
     }
 
     /**
@@ -52,6 +53,7 @@ public class CubicAbyss {
      */
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        BlocksRegisterHandler.registerBlocksRender();
     }
 
     /**
@@ -112,7 +114,6 @@ public class CubicAbyss {
          */
         @SubscribeEvent
         public static void addBlocks(RegistryEvent.Register<Block> event) {
-            registryBlock(new StoneTree(), event);
             /*
              event.getRegistry().register(new MySpecialBlock().setRegistryName(MOD_ID, "mySpecialBlock"));
             */

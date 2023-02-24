@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "cubicabyss:blocks/stone_tree"
+  "variants": {
+    "normal": {
+      "model": "cubicabyss:stone_tree"
+    }
   }
 }
