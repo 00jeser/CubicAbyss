@@ -7,7 +7,7 @@ public class Structures {
     public static final Structure[] UPSTRUCTURES = new Structure[]{
             new Structure(
                     new ResourceLocation(CubicAbyss.MOD_ID, "smallruines"),
-                    0, -10000,
+                    -10000, 0,
                     1000
             )
     };

@@ -132,8 +132,8 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
                     break;
             }
         } else
-            placementSettings.setMirror(Mirror.NONE);
-        placementSettings.setRotation(Rotation.NONE);
+            placementSettings.setRotation(Rotation.NONE);
+        placementSettings.setMirror(Mirror.NONE);
 
 // generate the structure in the world
         template.addBlocksToWorld(world, pos, placementSettings);
