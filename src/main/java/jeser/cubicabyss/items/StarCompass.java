@@ -7,6 +7,6 @@ public class StarCompass extends Item {
     public StarCompass() {
         super();
         setRegistryName("star_compass");
-        this.setCreativeTab(CreativeTabs.TOOLS);
+        this.setCreativeTab(CreativeTabs.MATERIALS);
     }
 }
