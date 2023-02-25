@@ -2,6 +2,7 @@ package jeser.cubicabyss;
 
 import jeser.cubicabyss.blocks.BlocksRegisterHandler;
 import jeser.cubicabyss.items.PrincessBosom;
+import jeser.cubicabyss.items.StarCompass;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -100,6 +101,7 @@ public class CubicAbyss {
             //registryItem(new StoneTree(), event);
             //registryItem(new ItemBlock(new StoneTree()), event);
             registryItem(new PrincessBosom(), event);
+            registryItem(new StarCompass(), event);
         }
 
         @SideOnly(Side.CLIENT)
@@ -134,6 +136,7 @@ public class CubicAbyss {
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
         //event.getRegistry().register(new StoneTree());
         event.getRegistry().register(new PrincessBosom());
+        event.getRegistry().register(new StarCompass());
     }
     /*
     @SubscribeEvent
