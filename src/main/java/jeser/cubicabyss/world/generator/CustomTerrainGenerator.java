@@ -105,18 +105,34 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
 
                     for (Structures.Structure s : structures) {
                         if (r.nextInt() % s.rare == 0 && globalY > s.minHeight && globalY < s.maxHeight)
-                            generateStrucure(s.location, new BlockPos(globalX, globalY, globalZ));
+                            generateStrucure(s.location, new BlockPos(globalX, globalY, globalZ), s.rotate);
                     }
                 }
     }
 
-    private void generateStrucure(ResourceLocation location, BlockPos pos) {
+    private void generateStrucure(ResourceLocation location, BlockPos pos, boolean randomRotation) {
         TemplateManager templateManager = world.getSaveHandler().getStructureTemplateManager();
         Template template = templateManager.getTemplate(world.getMinecraftServer(), location);
 
 // create the placement settings
         PlacementSettings placementSettings = new PlacementSettings();
-        placementSettings.setMirror(Mirror.NONE);
+        if (randomRotation) {
+            switch (r.nextInt() % 4) {
+                case 0:
+                    placementSettings.setRotation(Rotation.NONE);
+                    break;
+                case 1:
+                    placementSettings.setRotation(Rotation.CLOCKWISE_90);
+                    break;
+                case 2:
+                    placementSettings.setRotation(Rotation.CLOCKWISE_180);
+                    break;
+                default:
+                    placementSettings.setRotation(Rotation.COUNTERCLOCKWISE_90);
+                    break;
+            }
+        } else
+            placementSettings.setMirror(Mirror.NONE);
         placementSettings.setRotation(Rotation.NONE);
 
 // generate the structure in the world

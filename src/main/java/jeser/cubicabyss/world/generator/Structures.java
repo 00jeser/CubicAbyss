@@ -23,12 +23,21 @@ public class Structures {
         public int minHeight, maxHeight;
         // шанс появления структуры в каждом втором блоке равен 1/rare
         public int rare;
+        public boolean rotate;
 
-        public Structure(ResourceLocation location, int minHeight, int maxHeight, int rare) {
+        public Structure(ResourceLocation location,
+                         int minHeight, int maxHeight,
+                         int rare,
+                         boolean rotate /*todo biomes*/) {
             this.location = location;
             this.minHeight = minHeight;
             this.maxHeight = maxHeight;
             this.rare = rare;
+            this.rotate = rotate;
+        }
+
+        public Structure(ResourceLocation location, int minHeight, int maxHeight, int rare) {
+            this(location, minHeight, maxHeight, rare, true);
         }
     }
 }
