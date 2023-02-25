@@ -85,20 +85,27 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
                     int globalZ = ICube.SIZE * cube.getZ() + z;
                     float distance = (float) Math.sqrt(globalX * globalX + globalZ * globalZ);
                     float valueForCompare = coreGenerator.getValueForCompare(distance);
+
+                    Structures.Structure[] structures;
                     if (coreGenerator.getNoiseValue(globalX, globalY, globalZ) > valueForCompare) {
                         if (coreGenerator.getNoiseValue(globalX, globalY + 1, globalZ) <= valueForCompare) {
                             // up
-                            for (Structures.Structure s : Structures.UPSTRUCTURES) {
-                                if (r.nextInt() % s.rare == 0)
-                                    generateStrucure(s.location, new BlockPos(globalX, globalY, globalZ));
-                            }
+                            structures = Structures.UPSTRUCTURES;
                         } else if (coreGenerator.getNoiseValue(globalX, globalY - 1, globalZ) <= valueForCompare) {
                             // down
+                            structures = Structures.DOWNSTRUCTURES;
                         } else {
                             // inside
+                            structures = Structures.INSIDESTRUCTURES;
                         }
                     } else {
                         // air
+                        structures = Structures.AIRSTRUCTURES;
+                    }
+
+                    for (Structures.Structure s : structures) {
+                        if (r.nextInt() % s.rare == 0 && globalY > s.minHeight && globalY < s.maxHeight)
+                            generateStrucure(s.location, new BlockPos(globalX, globalY, globalZ));
                     }
                 }
     }
