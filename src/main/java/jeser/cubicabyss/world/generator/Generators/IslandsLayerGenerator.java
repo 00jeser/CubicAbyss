@@ -30,7 +30,7 @@ public class IslandsLayerGenerator implements IGenerationLayer {
 
     @Override
     public IBlockState getState(int x, int y, int z, float distance, IBlockState state) {
-        float valueForCompare = 1 - (distance * distanceModifier) / AbyssWorldGenerator.RADIUS;
+        float valueForCompare = getValueForCompare(distance);
         if (getNoiseValue(x, y, z) > valueForCompare)
             if (getNoiseValue(x, y + 1, z) <= valueForCompare)
                 return Blocks.GRASS.getDefaultState();
@@ -52,9 +52,13 @@ public class IslandsLayerGenerator implements IGenerationLayer {
             return null;
     }
 
-    private float getNoiseValue(int x, int y, int z) {
+    public float getNoiseValue(int x, int y, int z) {
         return
                 noise1.GetNoise(x * scaleXZ1, y * scaleY1, z * scaleXZ1)
                         + noise2.GetNoise(x * scaleXZ2, y * scaleY2, z * scaleXZ2);
+    }
+
+    public float getValueForCompare(float distance) {
+        return 1 - (distance * distanceModifier) / AbyssWorldGenerator.RADIUS;
     }
 }
