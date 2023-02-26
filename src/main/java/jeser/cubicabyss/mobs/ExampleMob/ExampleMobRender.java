@@ -1,4 +1,4 @@
-package jeser.cubicabyss.Mobs.ExampleMob;
+package jeser.cubicabyss.mobs.ExampleMob;
 
 import jeser.cubicabyss.CubicAbyss;
 import net.minecraft.client.renderer.entity.RenderLiving;

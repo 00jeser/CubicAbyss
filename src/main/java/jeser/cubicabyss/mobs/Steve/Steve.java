@@ -1,4 +1,4 @@
-package jeser.cubicabyss.Mobs.Steve;
+package jeser.cubicabyss.mobs.Steve;
 
 import jeser.cubicabyss.CubicAbyss;
 import net.minecraft.entity.SharedMonsterAttributes;

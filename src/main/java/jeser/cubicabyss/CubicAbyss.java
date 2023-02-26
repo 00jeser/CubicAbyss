@@ -1,10 +1,10 @@
 package jeser.cubicabyss;
 
-import jeser.cubicabyss.Mobs.MobRegisterHandler;
-import jeser.cubicabyss.Mobs.RenderHandler;
-import jeser.cubicabyss.Utils.PlayerUpdate;
 import jeser.cubicabyss.blocks.BlocksRegisterHandler;
 import jeser.cubicabyss.items.ItemsRegisterHandler;
+import jeser.cubicabyss.mobs.MobRegisterHandler;
+import jeser.cubicabyss.mobs.RenderHandler;
+import jeser.cubicabyss.utils.PlayerUpdate;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent;

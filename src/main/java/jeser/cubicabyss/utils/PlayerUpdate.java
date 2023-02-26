@@ -1,4 +1,4 @@
-package jeser.cubicabyss.Utils;
+package jeser.cubicabyss.utils;
 
 import jeser.cubicabyss.items.WearableArtefact;
 import net.minecraft.entity.player.EntityPlayer;

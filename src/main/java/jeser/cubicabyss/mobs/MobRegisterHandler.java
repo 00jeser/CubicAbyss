@@ -1,7 +1,7 @@
-package jeser.cubicabyss.Mobs;
+package jeser.cubicabyss.mobs;
 
-import jeser.cubicabyss.Mobs.ExampleMob.ExampleMob;
-import jeser.cubicabyss.Mobs.Steve.Steve;
+import jeser.cubicabyss.mobs.ExampleMob.ExampleMob;
+import jeser.cubicabyss.mobs.Steve.Steve;
 
 public class MobRegisterHandler {
     public static void RegisterAll() {

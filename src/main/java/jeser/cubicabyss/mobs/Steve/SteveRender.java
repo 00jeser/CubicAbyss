@@ -1,8 +1,6 @@
-package jeser.cubicabyss.Mobs.Steve;
+package jeser.cubicabyss.mobs.Steve;
 
 import jeser.cubicabyss.CubicAbyss;
-import jeser.cubicabyss.Mobs.ExampleMob.ExampleMob;
-import jeser.cubicabyss.Mobs.ExampleMob.ExampleMobModel;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
