@@ -1,9 +1,9 @@
-package jeser.cubicabyss.Mobs;
+package jeser.cubicabyss.mobs;
 
-import jeser.cubicabyss.Mobs.ExampleMob.ExampleMob;
-import jeser.cubicabyss.Mobs.ExampleMob.ExampleMobRender;
-import jeser.cubicabyss.Mobs.Steve.Steve;
-import jeser.cubicabyss.Mobs.Steve.SteveRender;
+import jeser.cubicabyss.mobs.ExampleMob.ExampleMob;
+import jeser.cubicabyss.mobs.ExampleMob.ExampleMobRender;
+import jeser.cubicabyss.mobs.Steve.Steve;
+import jeser.cubicabyss.mobs.Steve.SteveRender;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;

@@ -1,4 +1,4 @@
-package jeser.cubicabyss.Mobs.Steve;// Made with Blockbench 4.6.4
+package jeser.cubicabyss.mobs.Steve;// Made with Blockbench 4.6.4
 // Exported for Minecraft version 1.7 - 1.12
 // Paste this class into your mod and generate all required imports
 
