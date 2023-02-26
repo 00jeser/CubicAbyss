@@ -1,14 +1,17 @@
 package jeser.cubicabyss;
 
+import jeser.cubicabyss.Mobs.ExampleMob.ExampleMob;
+import jeser.cubicabyss.Mobs.RenderHandler;
+import jeser.cubicabyss.Mobs.Steve.Steve;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
@@ -35,6 +38,9 @@ public class CubicAbyss {
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
         AbyssWorldGenerator.create();
+        RenderHandler.registerEntityRender();
+        ExampleMob.register();
+        Steve.register();
     }
 
     /**
