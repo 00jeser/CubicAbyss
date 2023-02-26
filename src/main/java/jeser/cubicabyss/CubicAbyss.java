@@ -3,6 +3,9 @@ package jeser.cubicabyss;
 import jeser.cubicabyss.blocks.BlocksRegisterHandler;
 import jeser.cubicabyss.items.PrincessBosom;
 import jeser.cubicabyss.items.StarCompass;
+import jeser.cubicabyss.Mobs.ExampleMob.ExampleMob;
+import jeser.cubicabyss.Mobs.RenderHandler;
+import jeser.cubicabyss.Mobs.Steve.Steve;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -47,6 +50,9 @@ public class CubicAbyss {
     public void preinit(FMLPreInitializationEvent event) {
         AbyssWorldGenerator.create();
         BlocksRegisterHandler.registerBlocks();
+        RenderHandler.registerEntityRender();
+        ExampleMob.register();
+        Steve.register();
     }
 
     /**
