@@ -2,13 +2,17 @@ package jeser.cubicabyss;
 
 import jeser.cubicabyss.Mobs.MobRegisterHandler;
 import jeser.cubicabyss.Mobs.RenderHandler;
+import jeser.cubicabyss.Utils.PlayerUpdate;
 import jeser.cubicabyss.blocks.BlocksRegisterHandler;
 import jeser.cubicabyss.items.ItemsRegisterHandler;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(
         modid = CubicAbyss.MOD_ID,
@@ -54,5 +58,15 @@ public class CubicAbyss {
     @Mod.EventHandler
     public void postinit(FMLPostInitializationEvent event) {
 
+    }
+
+    @Mod.EventBusSubscriber
+    public static class EventHandler {
+        @SubscribeEvent
+        public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+            if (event.getEntityLiving() instanceof EntityPlayer) {
+                PlayerUpdate.Update(event);
+            }
+        }
     }
 }

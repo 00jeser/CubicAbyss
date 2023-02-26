@@ -1,5 +1,7 @@
 package jeser.cubicabyss.items;
 
+import jeser.cubicabyss.items.ItemsClasses.PrincessBosom;
+import jeser.cubicabyss.items.ItemsClasses.StarCompass;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;

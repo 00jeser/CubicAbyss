@@ -1,4 +1,4 @@
-package jeser.cubicabyss.items;
+package jeser.cubicabyss.items.ItemsClasses;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
