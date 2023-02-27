@@ -1,6 +1,7 @@
 package jeser.cubicabyss.items.ItemsClasses;
 
 import baubles.api.BaubleType;
+import jeser.cubicabyss.items.Artefact;
 import jeser.cubicabyss.items.WearableArtefact;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,5 +24,10 @@ public class PrincessBosom extends WearableArtefact {
     @Override
     public void Action(EntityPlayer player) {
         player.addPotionEffect(new PotionEffect(MobEffects.HASTE, 41));
+    }
+
+    @Override
+    public Artefact.Elementals getElement() {
+        return Elementals.stone;
     }
 }
