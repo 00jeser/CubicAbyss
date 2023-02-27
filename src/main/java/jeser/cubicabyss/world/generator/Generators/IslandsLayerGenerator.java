@@ -1,10 +1,10 @@
 package jeser.cubicabyss.world.generator.Generators;
 
 import FastNoise.FastNoiseLite;
+import jeser.cubicabyss.world.biomes.AbyssBiome;
+import jeser.cubicabyss.world.biomes.BiomeSelector;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
-import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 
 import java.util.Random;
 
@@ -17,6 +17,7 @@ public class IslandsLayerGenerator implements IGenerationLayer {
     private final FastNoiseLite noise1;
     private final FastNoiseLite noise2;
     Random r;
+    private BiomeSelector biomeSelector;
 
     public IslandsLayerGenerator(long seed) {
         noise1 = new FastNoiseLite();
@@ -26,28 +27,23 @@ public class IslandsLayerGenerator implements IGenerationLayer {
         noise2.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
         noise2.SetSeed((int) (seed + 1));
         r = new Random();
+        biomeSelector = new BiomeSelector(seed);
     }
 
     @Override
     public IBlockState getState(int x, int y, int z, float distance, IBlockState state) {
+        AbyssBiome biome = biomeSelector.getBiome(x, y, z);
         float valueForCompare = getValueForCompare(distance);
         if (getNoiseValue(x, y, z) > valueForCompare)
             if (getNoiseValue(x, y + 1, z) <= valueForCompare)
-                return Blocks.GRASS.getDefaultState();
+                return biome.Ground;
             else
-                return Blocks.STONE.getDefaultState();
+                return biome.Basis;
         else if (getNoiseValue(x, y - 1, z) > valueForCompare)
-            switch (r.nextInt() % 10) {
-                case 0:
-                case 1:
-                    return Blocks.TALLGRASS.getDefaultState().withProperty(
-                            BlockTallGrass.TYPE,
-                            BlockTallGrass.EnumType.GRASS);
-                case 2:
-                    return Blocks.RED_FLOWER.getDefaultState();
-                default:
-                    return null;
-            }
+            if (r.nextDouble() < biome.GrassChance)
+                return biome.Grass[r.nextInt(biome.Grass.length)];
+            else
+                return null;
         else
             return null;
     }
