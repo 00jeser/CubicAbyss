@@ -2,11 +2,14 @@ package jeser.cubicabyss;
 
 import jeser.cubicabyss.blocks.BlocksRegisterHandler;
 import jeser.cubicabyss.items.ItemsRegisterHandler;
+import jeser.cubicabyss.misc.CubicAbyssCT;
 import jeser.cubicabyss.mobs.MobRegisterHandler;
 import jeser.cubicabyss.mobs.RenderHandler;
 import jeser.cubicabyss.utils.PlayerUpdate;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -24,6 +27,7 @@ public class CubicAbyss {
     public static final String MOD_ID = "cubicabyss";
     public static final String MOD_NAME = "Cubic Abyss";
     public static final String VERSION = "1.0-SNAPSHOT";
+    public static final CreativeTabs MOD = new CubicAbyssCT("Mod");
 
     /**
      * This is the instance of your mod as created by Forge. It will never be null.
