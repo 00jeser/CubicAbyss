@@ -3,6 +3,8 @@ package jeser.cubicabyss.world.generator;
 import io.github.opencubicchunks.cubicchunks.api.util.Box;
 import io.github.opencubicchunks.cubicchunks.api.world.ICube;
 import io.github.opencubicchunks.cubicchunks.api.worldgen.CubePrimer;
+import jeser.cubicabyss.world.biomes.AbyssBiome;
+import jeser.cubicabyss.world.biomes.BiomeSelector;
 import jeser.cubicabyss.world.generator.Generators.IGenerationLayer;
 import jeser.cubicabyss.world.generator.Generators.IslandsLayerGenerator;
 import mcp.MethodsReturnNonnullByDefault;
@@ -18,6 +20,7 @@ import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -74,9 +77,10 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
 
 
     Random r = new Random();
-
+    BiomeSelector selector = new BiomeSelector(world.getSeed());
     @Override
     public void populate(ICube cube) {
+        AbyssBiome biome = selector.getBiome(cube.getX() * ICube.SIZE, cube.getY() * ICube.SIZE, cube.getZ() * ICube.SIZE);
         for (int y = 0; y < ICube.SIZE; y += 2)
             for (int x = 0; x < ICube.SIZE; x += 2)
                 for (int z = 0; z < ICube.SIZE; z += 2) {
@@ -104,7 +108,10 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
                     }
 
                     for (Structures.Structure s : structures) {
-                        if (r.nextInt() % s.rare == 0 && globalY > s.minHeight && globalY < s.maxHeight)
+                        if (r.nextInt() % s.rare == 0
+                                && globalY > s.minHeight && globalY < s.maxHeight
+                                && (Arrays.asList(s.availableBiomes).contains(biome) || s.availableBiomes.length == 0)
+                        )
                             generateStrucure(s.location, new BlockPos(globalX, globalY, globalZ), s.rotate);
                     }
                 }
