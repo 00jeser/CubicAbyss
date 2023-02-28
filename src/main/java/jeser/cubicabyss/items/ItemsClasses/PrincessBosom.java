@@ -1,6 +1,7 @@
 package jeser.cubicabyss.items.ItemsClasses;
 
 import baubles.api.BaubleType;
+import jeser.cubicabyss.CubicAbyss;
 import jeser.cubicabyss.items.Artefact;
 import jeser.cubicabyss.items.WearableArtefact;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +14,8 @@ public class PrincessBosom extends WearableArtefact {
     public PrincessBosom() {
         super();
         setRegistryName("princess_bosom");
-        this.setCreativeTab(CreativeTabs.TOOLS);
+        this.setCreativeTab(CubicAbyss.MOD);
+        this.setTranslationKey("princess_bosom");
     }
 
     @Override
