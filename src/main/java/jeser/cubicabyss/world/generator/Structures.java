@@ -21,6 +21,21 @@ public class Structures {
             )
     };
     public static final Structure[] DOWNSTRUCTURES = new Structure[]{
+            new Structure(
+                    new ResourceLocation(CubicAbyss.MOD_ID, "glowstones/glowstone1"),
+                    -20000, 0,
+                    1000
+            ),
+            new Structure(
+                    new ResourceLocation(CubicAbyss.MOD_ID, "glowstones/glowstone2"),
+                    -20000, 0,
+                    1000
+            ),
+            new Structure(
+                    new ResourceLocation(CubicAbyss.MOD_ID, "glowstones/glowstone3"),
+                    -20000, 0,
+                    1000
+            )
     };
     public static final Structure[] AIRSTRUCTURES = new Structure[]{
     };
