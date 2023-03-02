@@ -7,6 +7,7 @@ import jeser.cubicabyss.world.biomes.AbyssBiome;
 import jeser.cubicabyss.world.biomes.BiomeSelector;
 import jeser.cubicabyss.world.generator.Generators.IGenerationLayer;
 import jeser.cubicabyss.world.generator.Generators.IslandsLayerGenerator;
+import jeser.cubicabyss.world.generator.Generators.LightStoneLayerGenerator;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -40,7 +41,8 @@ public class CustomTerrainGenerator extends BasicCubeGenerator {
 
     private final IslandsLayerGenerator coreGenerator = new IslandsLayerGenerator(world.getSeed());
     private final IGenerationLayer[] generationLayers = new IGenerationLayer[]{
-            coreGenerator
+            coreGenerator,
+            new LightStoneLayerGenerator(world.getSeed())
     };
 
     @Override
