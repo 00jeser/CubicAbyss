@@ -104,6 +104,9 @@ jar {
 
             runtimeOnly fg.deobf("curse.maven:Baubles-227083:2459083")
             compileOnly fg.deobf("curse.maven:Baubles-227083:2459083")
+
+            runtimeOnly fg.deobf("curse.maven:CubicChunks-388172:3197366")
+            compileOnly fg.deobf("curse.maven:CubicChunks-388172:3197366")
             // Real mod deobf dependency examples - these get remapped to your current mappings
             // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
             // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
