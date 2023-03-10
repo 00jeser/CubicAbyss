@@ -3,12 +3,15 @@ package jeser.cubicabyss.mobs.DemonFish;
 import jeser.cubicabyss.CubicAbyss;
 import jeser.cubicabyss.mobs.Steve.Steve;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -47,15 +50,17 @@ public class DemonFish extends EntitySquid implements IAnimatable {
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0D);
     }
     private <E extends IAnimatable>PlayState predicate(AnimationEvent<E> event) {
+
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("model.animation.move", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.move", true));
+            //System.out.println(1);
             return PlayState.CONTINUE;
         }
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("model.animation.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", true));
         return PlayState.CONTINUE;
     }
 
