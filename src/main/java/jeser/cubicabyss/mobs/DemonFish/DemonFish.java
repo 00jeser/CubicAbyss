@@ -42,20 +42,16 @@ import javax.annotation.Nullable;
 public class DemonFish extends EntityCreature implements IAnimatable {
     private static final DataParameter<Boolean> MOVING = EntityDataManager.<Boolean>createKey(DemonFish.class, DataSerializers.BOOLEAN);
     public float lastHp = this.getHealth();
-    protected EntityAIWander wander;
     private AnimationFactory factory = new AnimationFactory(this);
     public DemonFish(World worldIn) {
         super(worldIn);
         this.moveHelper = new DemonFish.DemonFishMoveHelper(this);
     }
     protected void initEntityAI() {
-        EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
-        this.wander = new EntityAIWander(this, 1.0D, 80);
-        this.tasks.addTask(0, entityaimovetowardsrestriction);
-        tasks.addTask(1, new EntityAIPanic(this, 0.6D));
-        tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F));
+        tasks.addTask(0, new EntityAIPanic(this, 0.6D));
+        tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F));
+        tasks.addTask(2, new EntityAIWander(this, 0.3D));
         tasks.addTask(3, new EntityAILookIdle(this));
-        this.wander.setMutexBits(3);
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
