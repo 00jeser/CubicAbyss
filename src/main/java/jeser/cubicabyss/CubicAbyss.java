@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import software.bernie.geckolib3.GeckoLib;
 
 @Mod(
         modid = CubicAbyss.MOD_ID,
@@ -54,6 +55,7 @@ public class CubicAbyss {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         BlocksRegisterHandler.registerBlocksRender();
+        GeckoLib.initialize();
     }
 
     /**

@@ -1,5 +1,7 @@
 package jeser.cubicabyss.mobs;
 
+import jeser.cubicabyss.mobs.DemonFish.DemonFish;
+import jeser.cubicabyss.mobs.DemonFish.DemonFishRender;
 import jeser.cubicabyss.mobs.ExampleMob.ExampleMob;
 import jeser.cubicabyss.mobs.ExampleMob.ExampleMobRender;
 import jeser.cubicabyss.mobs.Steve.Steve;
@@ -21,6 +23,12 @@ public class RenderHandler {
             @Override
             public Render<? super Steve> createRenderFor(RenderManager manager) {
                 return new SteveRender(manager);
+            }
+        });
+        RenderingRegistry.registerEntityRenderingHandler(DemonFish.class, new IRenderFactory<DemonFish>() {
+            @Override
+            public Render<? super DemonFish> createRenderFor(RenderManager manager) {
+                return new DemonFishRender(manager);
             }
         });
     }
