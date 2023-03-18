@@ -18,7 +18,7 @@ public class ArtefactWorkbenchBlock extends Block {
 
     public ArtefactWorkbenchBlock() {
         super(Material.ANVIL);
-        setRegistryName("dawdjawjkledhalwukhgdyjqawkedgjaykwdgyjawgdkjyawhgdjkyh");
+        setRegistryName("artefact_workbench");
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

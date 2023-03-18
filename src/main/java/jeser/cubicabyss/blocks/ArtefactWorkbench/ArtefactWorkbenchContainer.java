@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ArtefactWorkbenchContainer extends Container {
-    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 1);
+    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 2);
     public InventoryCraftResult craftResult = new InventoryCraftResult();
     private final World world;
     /**
@@ -26,14 +26,23 @@ public class ArtefactWorkbenchContainer extends Container {
         this.pos = blockPos;
         this.player = playerInventory.player;
         //This is the output slot
-        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 0, 124, 35));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 0, 8 + 18 * 5, 26));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 1, 8 + 18 * 5, 26));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 2, 8 + 18 * 5, 26));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 3, 8 + 18 * 5, 26));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 4, 8 + 18 * 5, 26));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 5, 8 + 18 * 5, 26));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 6, 8 + 18 * 5, 26));
+        this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 7, 8 + 18 * 5, 26));
 
         //These are the input slots
-        for (int i = 0; i < 1; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                this.addSlotToContainer(new Slot(this.craftMatrix, j + i * 3, 30 + j * 18, 17 + i * 18));
-            }
-        }
+        this.addSlotToContainer(new ArtefactSlot(this.craftMatrix, 0, 8, 26));
+        this.addSlotToContainer(new ArtefactSlot(this.craftMatrix, 1, 8 + 18, 26));
+        this.addSlotToContainer(new ArtefactSlot(this.craftMatrix, 2, 8 + 18 * 2, 26));
+        this.addSlotToContainer(new ArtefactSlot(this.craftMatrix, 3, 8, 26 + 18));
+        this.addSlotToContainer(new ArtefactSlot(this.craftMatrix, 4, 8 + 18, 26 + 18));
+        this.addSlotToContainer(new ArtefactSlot(this.craftMatrix, 5, 8 + 18 * 2, 26 + 18));
+
         //these are the first 3 rows of inventory
         for (int k = 0; k < 3; ++k) {
             for (int i1 = 0; i1 < 9; ++i1) {
@@ -54,11 +63,17 @@ public class ArtefactWorkbenchContainer extends Container {
         //craftResult.setInventorySlotContents(0, MetalWorkbenchCraftingHandler.instance().getResult(this.craftMatrix, world));
         if (!this.world.isRemote) {
             EntityPlayerMP eplayer = (EntityPlayerMP) this.player;
-            //takes the items in the crafting matrix and finds a recipe with those things
-            // TODO set ItemStack to s
-            ItemStack s = new ItemStack(Items.ACACIA_BOAT, 64);
-            this.craftResult.setInventorySlotContents(0, s);
-            eplayer.connection.sendPacket(new SPacketSetSlot(this.windowId, 0, s));
+            if (!inventoryIn.getStackInSlot(0).isEmpty() && inventoryIn.getStackInSlot(0).getItem() == Items.APPLE) {
+                //takes the items in the crafting matrix and finds a recipe with those things
+                // TODO set ItemStack to s
+                ItemStack s = new ItemStack(Items.ACACIA_BOAT, 64);
+                this.craftResult.setInventorySlotContents(0, s);
+                eplayer.connection.sendPacket(new SPacketSetSlot(this.windowId, 0, s));
+            } else {
+                ItemStack s = new ItemStack(Items.AIR, 64);
+                this.craftResult.setInventorySlotContents(0, s);
+                eplayer.connection.sendPacket(new SPacketSetSlot(this.windowId, 0, s));
+            }
         }
     }
 

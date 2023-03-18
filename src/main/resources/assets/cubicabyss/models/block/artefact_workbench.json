@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "cubicabyss:blocks/artefact_workbench_front",
+    "south": "cubicabyss:blocks/artefact_workbench_front",
+    "east": "cubicabyss:blocks/artefact_workbench_side",
+    "west": "cubicabyss:blocks/artefact_workbench_side",
+    "up": "cubicabyss:blocks/artefact_workbench_top",
+    "down": "cubicabyss:blocks/artefact_workbench_bottom"
+  }
+}
