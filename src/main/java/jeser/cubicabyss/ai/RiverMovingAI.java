@@ -1,5 +1,6 @@
 package jeser.cubicabyss.ai;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 
@@ -39,21 +40,21 @@ public class RiverMovingAI extends EntityAIBase {
         if (rand.nextDouble() < chance) {
             // выбираем случайный угол поворота и расстояние для передвижения
             double angle = rand.nextDouble() * Math.PI * 2;
-            double distance = rand.nextDouble() * 8 + 8;
+            double distance = 5;
 
             // вычисляем новые координаты места назначения
             double destX = mob.posX + distance * Math.sin(angle);
             double destZ = mob.posZ + distance * Math.cos(angle);
 
             // устанавливаем новое направление движения
-            mob.getNavigator().tryMoveToXYZ(destX, mob.posY, destZ, 0.3);
+            mob.getNavigator().tryMoveToXYZ(destX, mob.posY, destZ, 3D);
         }
 
         // изменяем вертикальное положение моба
         if (rand.nextDouble() < 0.3) {
             // случайным образом меняем высоту моба
-            double deltaY = rand.nextDouble() * 0.4 - 0.2;
-            mob.motionY += deltaY;
+            double deltaY = rand.nextDouble() * 0.2 - 0.1;
+            mob.motionY += deltaY * 0.5;
         }
 
         // изменяем таймер плавания

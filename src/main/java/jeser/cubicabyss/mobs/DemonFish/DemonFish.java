@@ -46,7 +46,8 @@ public class DemonFish extends EntityCreature implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
     public DemonFish(World worldIn) {
         super(worldIn);
-        this.moveHelper = new DemonFish.DemonFishMoveHelper(this);
+        //this.moveHelper = new DemonFish.DemonFishMoveHelper(this);
+        this.setSize(0.6F, 0.5F);
     }
     protected void initEntityAI() {
         tasks.addTask(0, new EntityAIPanic(this, 0.6D));
@@ -57,7 +58,7 @@ public class DemonFish extends EntityCreature implements IAnimatable {
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(5D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0D);
     }
     public static void register() {
@@ -83,11 +84,11 @@ public class DemonFish extends EntityCreature implements IAnimatable {
         if (event.getController().getAnimationState() == AnimationState.Running)
             return PlayState.CONTINUE;
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.move", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.move", false));
             return PlayState.CONTINUE;
         }
         lastHp = this.getHealth();
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", false));
         return PlayState.CONTINUE;
     }
 
@@ -158,84 +159,5 @@ public class DemonFish extends EntityCreature implements IAnimatable {
     protected SoundEvent getFlopSound()
     {
         return SoundEvents.ENTITY_GUARDIAN_FLOP;
-    }
-
-    public void travel(float strafe, float vertical, float forward)
-    {
-        if (this.isServerWorld() && this.isInWater())
-        {
-            this.moveRelative(strafe, vertical, forward, 0.1F);
-            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= 0.8999999761581421D;
-            this.motionY *= 0.8999999761581421D;
-            this.motionZ *= 0.8999999761581421D;
-
-            if (!this.isMoving() && this.getAttackTarget() == null)
-            {
-                this.motionY -= 0.005D;
-            }
-        }
-        else
-        {
-            super.travel(strafe, vertical, forward);
-        }
-    }
-
-    static class DemonFishMoveHelper extends EntityMoveHelper
-    {
-        private final DemonFish demonFish;
-
-        public DemonFishMoveHelper(DemonFish fish)
-        {
-            super(fish);
-            this.demonFish = fish;
-        }
-
-        public void onUpdateMoveHelper()
-        {
-            if (this.action == EntityMoveHelper.Action.MOVE_TO && !this.demonFish.getNavigator().noPath())
-            {
-                double d0 = this.posX - this.demonFish.posX;
-                double d1 = this.posY - this.demonFish.posY;
-                double d2 = this.posZ - this.demonFish.posZ;
-                double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-                d1 = d1 / d3;
-                float f = (float)(MathHelper.atan2(d2, d0) * (180D / Math.PI)) - 90.0F;
-                this.demonFish.rotationYaw = this.limitAngle(this.demonFish.rotationYaw, f, 90.0F);
-                this.demonFish.renderYawOffset = this.demonFish.rotationYaw;
-                float f1 = (float)(this.speed * this.demonFish.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
-                this.demonFish.setAIMoveSpeed(this.demonFish.getAIMoveSpeed() + (f1 - this.demonFish.getAIMoveSpeed()) * 0.125F);
-                double d4 = Math.sin((double)(this.demonFish.ticksExisted + this.demonFish.getEntityId()) * 0.5D) * 0.05D;
-                double d5 = Math.cos((double)(this.demonFish.rotationYaw * 0.017453292F));
-                double d6 = Math.sin((double)(this.demonFish.rotationYaw * 0.017453292F));
-                this.demonFish.motionX += d4 * d5;
-                this.demonFish.motionZ += d4 * d6;
-                d4 = Math.sin((double)(this.demonFish.ticksExisted + this.demonFish.getEntityId()) * 0.75D) * 0.05D;
-                this.demonFish.motionY += d4 * (d6 + d5) * 0.25D;
-                this.demonFish.motionY += (double)this.demonFish.getAIMoveSpeed() * d1 * 0.1D;
-                EntityLookHelper entitylookhelper = this.demonFish.getLookHelper();
-                double d7 = this.demonFish.posX + d0 / d3 * 2.0D;
-                double d8 = (double)this.demonFish.getEyeHeight() + this.demonFish.posY + d1 / d3;
-                double d9 = this.demonFish.posZ + d2 / d3 * 2.0D;
-                double d10 = entitylookhelper.getLookPosX();
-                double d11 = entitylookhelper.getLookPosY();
-                double d12 = entitylookhelper.getLookPosZ();
-
-                if (!entitylookhelper.getIsLooking())
-                {
-                    d10 = d7;
-                    d11 = d8;
-                    d12 = d9;
-                }
-
-                this.demonFish.getLookHelper().setLookPosition(d10 + (d7 - d10) * 0.125D, d11 + (d8 - d11) * 0.125D, d12 + (d9 - d12) * 0.125D, 10.0F, 40.0F);
-                this.demonFish.setMoving(true);
-            }
-            else
-            {
-                this.demonFish.setAIMoveSpeed(0.0F);
-                this.demonFish.setMoving(false);
-            }
-        }
     }
 }
