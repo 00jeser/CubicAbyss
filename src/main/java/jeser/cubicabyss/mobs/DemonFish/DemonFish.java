@@ -1,6 +1,7 @@
 package jeser.cubicabyss.mobs.DemonFish;
 
 import jeser.cubicabyss.CubicAbyss;
+import jeser.cubicabyss.ai.RiverMovingAI;
 import jeser.cubicabyss.mobs.Steve.Steve;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
@@ -49,9 +50,10 @@ public class DemonFish extends EntityCreature implements IAnimatable {
     }
     protected void initEntityAI() {
         tasks.addTask(0, new EntityAIPanic(this, 0.6D));
-        tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F));
-        tasks.addTask(2, new EntityAIWander(this, 0.3D));
-        tasks.addTask(3, new EntityAILookIdle(this));
+        tasks.addTask(1, new RiverMovingAI(this));
+        tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F));
+        //tasks.addTask(3, new EntityAIWander(this, 0.3D));
+        tasks.addTask(4, new EntityAILookIdle(this));
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
