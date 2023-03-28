@@ -4,3 +4,4 @@ tile.stone_tree.name=Каменное дерево
 itemGroup.Mod=Вещи из мода
 entity.examplemob.name=Тестовый моб
 entity.steve.name=Стив(додик)
+container.artefact_workbench=Верстак артефактов

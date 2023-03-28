@@ -1,5 +1,6 @@
 package jeser.cubicabyss.blocks;
 
+import jeser.cubicabyss.blocks.ArtefactWorkbench.ArtefactWorkbenchBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -11,8 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlocksRegisterHandler {
+    public static final ArtefactWorkbenchBlock ARTEFACT_WORKBENCH_BLOCK = new ArtefactWorkbenchBlock();
     public static final Block[] blocks = new Block[]{
-            new StoneTree()
+            new StoneTree(),
+            ARTEFACT_WORKBENCH_BLOCK
     };
 
     public static void registerBlocks() {
