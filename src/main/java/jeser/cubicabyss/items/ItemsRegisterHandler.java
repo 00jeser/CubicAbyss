@@ -12,10 +12,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemsRegisterHandler {
+    public static Item PrincessBosom = new PrincessBosom();
+    public static Item StarCompass = new StarCompass();
 
     public static void RegisterAll() {
-        registryItem(new PrincessBosom());
-        registryItem(new StarCompass());
+        registryItem(PrincessBosom);
+        registryItem(StarCompass);
     }
 
     public static void registryItem(Item a) {

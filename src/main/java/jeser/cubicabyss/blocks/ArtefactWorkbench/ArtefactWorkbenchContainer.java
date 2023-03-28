@@ -6,11 +6,19 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketSetSlot;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Map;
+
+import static jeser.cubicabyss.utils.ArtefactCraftTable.recipes;
+
+// TODO исправить баг дублирования предметов в крафте
 public class ArtefactWorkbenchContainer extends Container {
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 2);
     public InventoryCraftResult craftResult = new InventoryCraftResult();
@@ -63,13 +71,26 @@ public class ArtefactWorkbenchContainer extends Container {
         //craftResult.setInventorySlotContents(0, MetalWorkbenchCraftingHandler.instance().getResult(this.craftMatrix, world));
         if (!this.world.isRemote) {
             EntityPlayerMP eplayer = (EntityPlayerMP) this.player;
-            if (!inventoryIn.getStackInSlot(0).isEmpty() && inventoryIn.getStackInSlot(0).getItem() == Items.APPLE) {
-                //takes the items in the crafting matrix and finds a recipe with those things
-                // TODO set ItemStack to s
-                ItemStack s = new ItemStack(Items.ACACIA_BOAT, 64);
-                this.craftResult.setInventorySlotContents(0, s);
-                eplayer.connection.sendPacket(new SPacketSetSlot(this.windowId, 0, s));
-            } else {
+            HashSet<Item> hs = new HashSet<>(Arrays.asList(
+                    inventoryIn.getStackInSlot(0).getItem(),
+                    inventoryIn.getStackInSlot(1).getItem(),
+                    inventoryIn.getStackInSlot(2).getItem(),
+                    inventoryIn.getStackInSlot(3).getItem(),
+                    inventoryIn.getStackInSlot(4).getItem(),
+                    inventoryIn.getStackInSlot(5).getItem()
+            ));
+            if (hs.contains(Items.AIR))
+                hs.remove(Items.AIR);
+            for (Map.Entry<HashSet<Item>, Item> entry : recipes.entrySet()) {
+                if (hs.equals(entry.getKey())) {
+                    System.out.println("vugfzduyhvfj");
+                    ItemStack s = new ItemStack(entry.getValue(), 1);
+                    craftResult.setInventorySlotContents(0, s);
+                    eplayer.connection.sendPacket(new SPacketSetSlot(this.windowId, 0, s));
+                    return;
+                }
+            }
+            {
                 ItemStack s = new ItemStack(Items.AIR, 64);
                 this.craftResult.setInventorySlotContents(0, s);
                 eplayer.connection.sendPacket(new SPacketSetSlot(this.windowId, 0, s));
