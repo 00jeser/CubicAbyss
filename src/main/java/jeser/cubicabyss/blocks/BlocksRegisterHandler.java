@@ -15,6 +15,7 @@ public class BlocksRegisterHandler {
     public static final ArtefactWorkbenchBlock ARTEFACT_WORKBENCH_BLOCK = new ArtefactWorkbenchBlock();
     public static final Block[] blocks = new Block[]{
             new StoneTree(),
+            new GlowGrass(),
             ARTEFACT_WORKBENCH_BLOCK
     };
 
