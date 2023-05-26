@@ -8,9 +8,10 @@ import net.minecraft.util.DamageSource;
 
 public class CurseActionsHandler {
     public static void execute(EntityPlayer player) {
+        int curseLevel = (player.getPosition().getY() / -1000) + 1;
         System.out.println("curse for " + player.getName() + " curse: " + player.getEntityData().getInteger("curse")
-                + "; player's y: " + player.posY + "; curse level " + (player.getPosition().getY() / -1000));
-        switch (player.getPosition().getY() / -1000) {
+                + "; player's y: " + player.posY + "; curse level " + curseLevel);
+        switch (curseLevel) {
             case 1:
                 curseLvl1(player);
                 break;
