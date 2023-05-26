@@ -8,8 +8,11 @@ import jeser.cubicabyss.mobs.MobRegisterHandler;
 import jeser.cubicabyss.mobs.RenderHandler;
 import jeser.cubicabyss.utils.PlayerUpdate;
 import jeser.cubicabyss.world.generator.AbyssWorldGenerator;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -57,6 +60,7 @@ public class CubicAbyss {
     public void init(FMLInitializationEvent event) {
         BlocksRegisterHandler.registerBlocksRender();
         GeckoLib.initialize();
+        MinecraftForge.EVENT_BUS.register(new DebugScreenEventHandler());
     }
 
     /**
@@ -75,5 +79,15 @@ public class CubicAbyss {
                 PlayerUpdate.Update(event);
             }
         }
+
+        @SubscribeEvent
+        public void onRenderGameOverlay(RenderGameOverlayEvent.Text event) {
+            event.getLeft().add("Abyss:");
+            Minecraft mc = Minecraft.getMinecraft();
+            if (mc.player != null) {
+                event.getLeft().add("Curse level: " + mc.player.getEntityData().getFloat("curse"));
+            }
+        }
     }
+
 }
