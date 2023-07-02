@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "CraftToAbyss",
+  "version": "${version}",
+  "name": "CraftToAbyss",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/00jes/CraftToAbyss"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/CraftToAbyss/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "ru.jeser.crafttoabyss.client.CraftToAbyssClient"
+    ],
+    "main": [
+      "ru.jeser.crafttoabyss.CraftToAbyss"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

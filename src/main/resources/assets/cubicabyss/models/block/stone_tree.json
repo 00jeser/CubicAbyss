@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "cubicabyss:blocks/stone_tree_top",
-    "side": "cubicabyss:blocks/stone_tree_side"
-  }
-}
